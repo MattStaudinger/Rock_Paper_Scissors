@@ -9,9 +9,111 @@
 <body>
 <script>
 
+let computerSelection;
+
+	function computerPlay () {
+		 let randomNumber = Math.floor((Math.random() * 3) + 1); 
+		 switch (randomNumber) {
+
+		 	case 1: 
+		 	computerSelection = "rock";
+		 	break;
+
+		 	case 2: 
+		 	computerSelection = "paper";
+		 	break;
+
+		 	case 3:
+		 	computerSelection = "scissors";
+		 	break;
+
+		 	default:
+		 	computerSelection ="Error_yo";
+
+		 }
+
+
+		 return computerSelection;
+	}
+
+let playerSelection = prompt ("Rock Paper or Scissors?");
+let winnerDeclaration;
+
+if (playerSelection == "" || !(isNaN(playerSelection))) {
+	winnerDeclaration = 2;
+	//function() { alert ("Falsche Eingabe!");}
+	}	else {playerSelection = playerSelection.toLowerCase ();
+		console.log(playerSelection);}
+
+
+
+function gameEvaluation (playerSelection, computerSelection) {
+//Eingabe des Spielers sicherstellen, dass sie korrekt ist:
 
 	
+//alle möglichen Optionen durchspielen
 
+switch (true) {
+
+case (playerSelection == "paper" && computerSelection == "paper"):
+	winnerDeclaration = "Patt."
+return winnerDeclaration;
+break;
+
+
+case (playerSelection == "paper" && computerSelection == "rock"):
+winnerDeclaration = "Player wins."
+return winnerDeclaration;
+break;
+
+case (playerSelection == "paper" && computerSelection == "scissors"):
+winnerDeclaration = "Computer wins."
+return winnerDeclaration;
+break;
+
+case (playerSelection == "rock" && computerSelection == "paper"):
+winnerDeclaration = "Computer wins."
+return winnerDeclaration;
+break;
+
+case (playerSelection == "rock" && computerSelection == "rock"):
+winnerDeclaration = "Patt."
+return winnerDeclaration;
+break;
+
+case (playerSelection == "rock" && computerSelection == "scissors"):
+winnerDeclaration = "Player wins."
+return winnerDeclaration;
+break;
+
+case (playerSelection == "scissors" && computerSelection == "paper"):
+winnerDeclaration = "Player wins."
+return winnerDeclaration;
+break;
+
+case (playerSelection == "scissors" && computerSelection == "rock"):
+winnerDeclaration = "Computer wins."
+return winnerDeclaration;
+break;
+
+case (playerSelection == "scissors" && computerSelection == "scissors"):
+winnerDeclaration = "Patt"
+return winnerDeclaration;
+break;
+
+
+default:
+winnerDeclaration = "Error"
+break;
+}
+
+}
+
+alert (computerPlay ());
+
+if (winnerDeclaration != "2") {
+	console.log (gameEvaluation (playerSelection, computerSelection));
+} else {console.log ("Falsche Eingabe")}
 
 	  </script>
 </body>
