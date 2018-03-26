@@ -12,8 +12,11 @@
 let computerSelection;
 let playerSelection;
 let winnerDeclaration;
+console.log (game());
 
-//Funktion: Eingabe vom Computer
+
+
+//Function: Get the selection of the computer
 	function computerPlay () {
 		 let randomNumber = Math.floor((Math.random() * 3) + 1); 
 		 switch (randomNumber) {
@@ -38,57 +41,49 @@ let winnerDeclaration;
 
 	}
 
-//Funktion: Eingabe von Spieler
-function playerChoice() {
+
+
+//Function: Get the selection of the player
+function playerPlay() {
+
+let rps = ["rock", "paper" , "scissors"];
+playerSelection = undefined;
+
+while (!(rps.includes (playerSelection))) {
 
 playerSelection = prompt ("Rock Paper or Scissors?");
-	//Eingabe des Spielers sicherstellen, dass sie korrekt ist:
-	if (playerSelection == "" || !(isNaN(playerSelection))) {
+if (playerSelection == null) { //if the player presses cancel, he will loose the round.
+	playerSelection = "null"
+	return playerSelection;
+}
 
-		playerSelection = "Nichts"
+playerSelection = playerSelection.toLowerCase();
 
-	}	else {
-		playerSelection = playerSelection.toLowerCase ();
-				}
+}
 return playerSelection;
+
 }
 
 
-//Funktion: 5 Spiele hintereinander
-function game () {
 
-for (i = 1; i <= 2; i++) {
-
-gameEvaluation (playerChoice(), computerPlay());
-
-console.log ("Playerselection:" + playerSelection);
-console.log ("Computerselection:" + computerSelection);
-console.log ("Round " + i + " winner: " + winnerDeclaration);
-
-
-} // for loop Ende
-
-
-} // Function Ende
-
-
-
-
-// Funktion: Ermittlung des Gewinners
+//Function: Evaluating the winner of the Round
 function gameEvaluation (playerSelection, computerSelection) {
 
 //alle möglichen Optionen durchspielen
 
 switch (true) {
 
-case (playerSelection == "paper" && computerSelection == "paper"):
-case (playerSelection == "rock" && computerSelection == "rock"):
-case (playerSelection == "scissors" && computerSelection == "scissors"):
-
-	winnerDeclaration = "Patt."
+case (playerSelection == computerSelection):
+winnerDeclaration = "Draw. No points awarded."
 return winnerDeclaration;
 break;
 
+case 	(playerSelection == "null" && computerSelection == "rock"):
+case 	(playerSelection == "null" && computerSelection == "paper"):
+case 	(playerSelection == "null" && computerSelection == "scissors"):
+			winnerDeclaration = "Computer wins.";
+			return winnerDeclaration;
+			break;
 
 case (playerSelection == "paper" && computerSelection == "rock"):
 winnerDeclaration = "Player wins."
@@ -126,20 +121,66 @@ winnerDeclaration = "Error"
 break;
 }
 
+}
 
-
+//Function: Capitalize the first letter
+function capitalizeFirstLetter (string) {
+	string = (string.charAt(0).toUpperCase() + string.slice(1));
+	return string;
 }
 
 
+//Function: A game of Rock, Paper, Scissor with 5 rounds
+function game () {
+
+let scorePlayer = 0;
+let scoreComputer = 0;
+let rounds = 5;
+
+for (i = 1; i <= rounds; i++) {
+
+gameEvaluation (playerPlay(), computerPlay());
+
+if (winnerDeclaration == "Player wins.") {
+	scorePlayer++;
+	} 	else if (winnerDeclaration == "Computer wins.") {
+		scoreComputer++;
+	}
+
+playerSelection = capitalizeFirstLetter (playerSelection);
+computerSelection = capitalizeFirstLetter (computerSelection);
+
+console.log ("----ROUND " + i + " -----")
+console.log ("Choice of the Player: " + playerSelection);
+console.log ("Choice of the Computer: " + computerSelection);
+console.log ("Round " + i + " winner: " + winnerDeclaration);
+console.log ("Player score: " + scorePlayer + " Computer score: " + scoreComputer);
+
+if (i == rounds) {
+switch (true) {
 
 
+case (scorePlayer > scoreComputer):
+	console.log ("----FINAL RESULTS-----")
+	console.log ("The Player wins the game!");
+	break;
+
+case (scorePlayer < scoreComputer):
+	console.log ("----FINAL RESULTS-----")
+	console.log ("The computer wins the game!");
+	break; 
+
+case (scorePlayer == scoreComputer):
+	console.log ("----FINAL RESULTS-----")
+	console.log ("It's a draw!");
+	break;
+
+} // END SWITCH
+} // END IF
+} // for loop Ende
+} // Function Ende
 
 
-//alert (computerPlay ());
-
-//if (winnerDeclaration != "2") {
-	console.log (game());
-//} else {console.log ("Falsche Eingabe")}
 
 	  </script>
 </body>
